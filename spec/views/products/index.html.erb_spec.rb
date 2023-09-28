@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "products/index", type: :view do
-  before(:each) do
+  before do
     assign(:products, [
       Product.create!(
         product_code: "Product Code",

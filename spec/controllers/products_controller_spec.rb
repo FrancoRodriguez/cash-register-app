@@ -1,4 +1,3 @@
-require 'bundler/setup'
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
@@ -16,22 +15,32 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     describe 'PATCH update' do
-      it 'updates a product' do
-        new_product_name = 'Black Tea'
+      let(:new_product_name) { Faker::Commerce.product_name }
 
+      before do
         patch :update, params: { id: product.id, product: { name: new_product_name } }
+      end
 
-        expect(response).to redirect_to(product_path(product))
+      it 'updates a product' do
         expect(product.reload.name).to eq(new_product_name)
+      end
+
+      it 'redirect to product path' do
+        expect(response).to redirect_to(product_path(product))
       end
     end
 
     describe 'DELETE destroy' do
-      it 'destroys a product' do
+      before do
         delete :destroy, params: { id: product.id }
+      end
 
-        expect(response).to redirect_to(products_path)
+      it 'destroys a product' do
         expect(Product.find_by(id: product.id)).to be_nil
+      end
+
+      it 'redirect to products path' do
+        expect(response).to redirect_to(products_path)
       end
     end
   end

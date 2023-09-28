@@ -1,28 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe "products/edit", type: :view do
-  let(:product) {
-    Product.create!(
-      product_code: "MyString",
-      name: "MyString",
-      price: "9.99"
-    )
-  }
+  let(:product) { create(:product) }
 
-  before(:each) do
+  before do
     assign(:product, product)
+    render
   end
 
   it "renders the edit product form" do
-    render
+    assert_select "form[action=?][method=?]", product_path(product), "post"
+  end
 
-    assert_select "form[action=?][method=?]", product_path(product), "post" do
+  it "renders an input field for product_code" do
+    assert_select "input[name=?]", "product[product_code]"
+  end
 
-      assert_select "input[name=?]", "product[product_code]"
+  it "renders an input field for name" do
+    assert_select "input[name=?]", "product[name]"
+  end
 
-      assert_select "input[name=?]", "product[name]"
-
-      assert_select "input[name=?]", "product[price]"
-    end
+  it "renders an input field for price" do
+    assert_select "input[name=?]", "product[price]"
   end
 end

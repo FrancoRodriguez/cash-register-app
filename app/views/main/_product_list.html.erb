@@ -14,8 +14,15 @@
           <td><%= product.product_code %></td>
           <td><%= product.name %></td>
           <td><%= number_to_currency(product.price, unit: '€', precision: 2) %></td>
-          <td><%= number_field_tag "count", 1 %></td>
-          <td><%= link_to "Add to Cart" %></td>
+          <td>
+            <%= form_for @order_product do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.number_field :quantity, value: 1, min: 1 %>
+          </td>
+          <td>
+             <%= f.submit "Add to cart" %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
       </tbody>
