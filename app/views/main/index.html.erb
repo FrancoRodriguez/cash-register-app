@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Cash Register App</title>
+  </head>
+  <body>
+    <h1>Cash Register App</h1>
+
+    <ul>
+      <li><%= link_to "Products Management", products_path %></li>
+    </ul>
+
+    <%= render 'product_list', products: @products %>
+  </body>
+</html>
