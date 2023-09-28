@@ -1,0 +1,20 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+  - rubocop-capybara
+  - rubocop-factory_bot
+  - rubocop-rspec
+
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+Rails:
+  Enabled: true
+
+# Customize rules for views, e.g., Layout/LineLength:
+Layout/LineLength:
+  Max: 120
+
+Style/Documentation:
+  Enabled: false
