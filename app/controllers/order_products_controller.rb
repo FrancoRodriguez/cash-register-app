@@ -3,21 +3,30 @@ class OrderProductsController < ApplicationController
 
   def create
     @order_product = @order.order_products.new(order_product_params)
-    return successful_return if @order_product.save
+    return successful_return(I18n.t('order_products.product_added')) if @order_product.save
 
-    render_error
+    render_error(I18n.t('order_products.failed_to_add_product'))
+  end
+
+  def update
+    return successful_return(I18n.t('order_products.product_updated')) if order_product.update(order_product_params)
+
+    render_error(I18n.t('order_products.failed_to_update_product'))
   end
 
   private
 
-  def successful_return
-    session[:order_id] = @order.id
-    redirect_to root_path, notice: I18n.t('order_products.product_added')
+  def order_product
+    current_order.order_products.find(params[:id])
   end
 
-  def render_error
-    flash[:alert] = I18n.t('order_products.failed_to_add_product')
-    render :new
+  def successful_return(message)
+    session[:order_id] = @order.id
+    redirect_to root_path, notice: message
+  end
+
+  def render_error(message)
+    redirect_to root_path, notice: message
   end
 
   def set_order

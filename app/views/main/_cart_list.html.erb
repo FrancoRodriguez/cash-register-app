@@ -15,7 +15,7 @@
           <td><%= item.product.name %></td>
           <td><%= number_to_currency(item.product.price, unit: '€', precision: 2) %></td>
           <td>
-            <%= form_for item.product do |f| %>
+            <%= form_for item do |f| %>
               <%= f.hidden_field :product_id, :value => item.product.id %>
               <%= f.number_field :quantity, :value => item.quantity.to_i, :min => 1 %>
           </td>

@@ -20,4 +20,22 @@ RSpec.describe OrderProductsController, type: :controller do
       expect(session[:order_id]).to eq(assigns(:order).id)
     end
   end
+
+  describe 'PATCH #update' do
+    let(:order) { create(:order) }
+    let(:order_product) { create(:order_product, product: product, order: order)}
+
+    before do
+      session[:order_id] = order.id
+    end
+
+    it 'updates the order product' do
+      quantity = Faker::Number.between(from: 1, to: 10)
+      patch :update, params: { id: order_product.id, order_product: { quantity: } }
+
+      expect(order_product.reload.quantity).to eq(quantity)
+      expect(response).to redirect_to(root_path)
+      expect(flash[:notice]).to eq(I18n.t('order_products.product_updated'))
+    end
+  end
 end
