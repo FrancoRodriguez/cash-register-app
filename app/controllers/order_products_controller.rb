@@ -9,9 +9,17 @@ class OrderProductsController < ApplicationController
   end
 
   def update
-    return successful_return(I18n.t('order_products.product_updated')) if order_product.update(order_product_params)
+    if order_product.update(order_product_params)
+      return redirect_to root_path,
+                         notice: I18n.t('order_products.product_updated')
+    end
 
     render_error(I18n.t('order_products.failed_to_update_product'))
+  end
+
+  def destroy
+    order_product.destroy
+    redirect_to root_path, notice: I18n.t('order_products.product_deleted')
   end
 
   private

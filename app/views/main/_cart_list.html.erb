@@ -20,8 +20,11 @@
               <%= f.number_field :quantity, :value => item.quantity.to_i, :min => 1 %>
           </td>
           <td>
-             <%= f.submit "Update" %>
-            <% end %>
+            <%= f.submit "Update" %>
+          <% end %>
+          </td>
+          <td>
+            <%= button_to "Delete", order_product_path(item), method: :delete %>
           </td>
         </tr>
       <% end %>

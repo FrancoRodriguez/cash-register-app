@@ -2,6 +2,7 @@ en:
   order_products:
     product_added: Product added to order successfully
     product_updated: Product updated successfully
+    product_deleted: Product deleted successfully
     failed_to_add_product: Failed to add product to cart
     failed_to_update_product: Failed to update product to cart
   carts:
