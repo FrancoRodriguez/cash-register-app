@@ -2,3 +2,5 @@ en:
   order_products:
     product_added: Product added to order successfully
     failed_to_add_product: Failed to add product to order
+  carts:
+    new: New cart created

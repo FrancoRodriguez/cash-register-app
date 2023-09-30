@@ -12,7 +12,7 @@
         <tr>
           <td><%= product.product_code %></td>
           <td><%= product.name %></td>
-          <td><%= number_to_currency(product.price, unit: '€', precision: 2) %></td>
+          <td><%= format_price(product.price) %></td>
           <td>
             <% if current_order.product_already_in_cart?(product.id) %>
               Product is in the cart

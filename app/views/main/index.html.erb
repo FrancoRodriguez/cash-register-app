@@ -8,8 +8,11 @@
 
     <ul>
       <li><%= link_to "Products Management", products_path %></li>
+      <li><%= button_to "New Cart", new_cart_path, method: :post %>
+      </li>
     </ul>
 
     <%= render 'product_list', products: @products %>
+    <%= render 'cart_list' unless @order_products.blank? %>
   </body>
 </html>

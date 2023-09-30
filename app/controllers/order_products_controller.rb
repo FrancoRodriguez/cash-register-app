@@ -3,9 +3,9 @@ class OrderProductsController < ApplicationController
 
   def create
     @order_product = @order.order_products.new(order_product_params)
-    successful_return if @order_product.save
+    return successful_return if @order_product.save
 
-    render_error unless @order_product.save
+    render_error
   end
 
   private

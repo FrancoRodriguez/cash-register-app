@@ -1,1 +1,32 @@
-              <%= f.number_field :quantity, :value => 1, :min => 1 %>
+<tbody>
+    <table>
+      <thead>
+      <tr>
+        <th>Product Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Count</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @order_products.each do |item| %>
+        <tr>
+          <td><%= item.product.product_code %></td>
+          <td><%= item.product.name %></td>
+          <td><%= number_to_currency(item.product.price, unit: '€', precision: 2) %></td>
+          <td>
+            <%= form_for item.product do |f| %>
+              <%= f.hidden_field :product_id, :value => item.product.id %>
+              <%= f.number_field :quantity, :value => item.quantity.to_i, :min => 1 %>
+          </td>
+          <td>
+             <%= f.submit "Update" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+</tbody>
+
+<p> <%= format_price(current_order.total) %></p>
