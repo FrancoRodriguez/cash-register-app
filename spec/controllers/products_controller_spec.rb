@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-
   describe 'CRUD' do
     let(:product_params) { { product_code: 'GR1', name: 'Green Tea', price: 3.11 } }
     let(:product) { Product.create(product_params) }

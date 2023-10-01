@@ -1,0 +1,3 @@
+GREEN_TEA_CODE = 'GR1'.freeze
+STRAWBERRIES_CODE = 'SR1'.freeze
+COFFEE_CODE = 'CF1'.freeze
