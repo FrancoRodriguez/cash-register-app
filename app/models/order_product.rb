@@ -8,6 +8,7 @@ class OrderProduct < ApplicationRecord
   def total
     return calculate_green_tea_offer if green_tea?(product)
     return calculate_strawberry_offer if strawberry_discount?(product, quantity)
+    return calculate_coffee_discount if coffee_discount?(product, quantity)
 
     product.price * quantity
   end
@@ -20,6 +21,10 @@ class OrderProduct < ApplicationRecord
 
   def calculate_strawberry_offer
     StrawberryOfferCalculatorService.new(product, quantity).calculate
+  end
+
+  def calculate_coffee_discount
+    CoffeeOfferCalculatorService.new(product, quantity).calculate
   end
 
   def set_total

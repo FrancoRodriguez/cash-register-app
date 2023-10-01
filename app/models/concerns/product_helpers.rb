@@ -6,4 +6,8 @@ module ProductHelpers
   def strawberry_discount?(product, quantity)
     product.product_code == STRAWBERRIES_CODE && quantity >= STRAWBERRIES_QUANTITY_DISCOUNT
   end
+
+  def coffee_discount?(product, quantity)
+    product.product_code == COFFEE_CODE && quantity >= COFFEE_QUANTITY_DISCOUNT
+  end
 end
