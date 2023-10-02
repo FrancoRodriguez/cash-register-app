@@ -18,11 +18,21 @@ RSpec.describe "/products", type: :request do
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    product_name = Faker::Commerce.product_name
+    number = Faker::Number.between(from: 1, to: 10)
+    {
+      product_code: "#{product_name[0..1].upcase}#{number}",
+      name: product_name,
+      price: Faker::Commerce.price(range: 1.00..100.00)
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      product_code: Faker::Number.between(from: 1, to: 10),
+      name: Faker::Number.between(from: 1, to: 10),
+      price: -1
+    }
   }
 
   describe "GET /index" do
@@ -78,9 +88,9 @@ RSpec.describe "/products", type: :request do
       end
 
     
-      it "renders a successful response (i.e. to display the 'new' template)" do
+      it "renders a not successful response (i.e. to display the 'new' template)" do
         post products_url, params: { product: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).not_to be_successful
       end
     
     end
@@ -89,14 +99,16 @@ RSpec.describe "/products", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          name: Faker::Commerce.product_name
+        }
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         patch product_url(product), params: { product: new_attributes }
         product.reload
-        skip("Add assertions for updated state")
+        assert_equal(new_attributes[:name], product.name)
       end
 
       it "redirects to the product" do
@@ -109,10 +121,10 @@ RSpec.describe "/products", type: :request do
 
     context "with invalid parameters" do
     
-      it "renders a successful response (i.e. to display the 'edit' template)" do
+      it "renders a not successful response (i.e. to display the 'edit' template)" do
         product = Product.create! valid_attributes
         patch product_url(product), params: { product: invalid_attributes }
-        expect(response).to be_successful
+        expect(response).not_to be_successful
       end
     
     end
