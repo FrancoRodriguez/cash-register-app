@@ -4,15 +4,16 @@
     <title>Cash Register App</title>
   </head>
   <body>
-    <h1>Cash Register App</h1>
-
-    <ul>
-      <li><%= link_to "Products Management", products_path %></li>
-      <li><%= button_to "New Cart", new_cart_path, method: :post %>
-      </li>
-    </ul>
-
-    <%= render 'product_list', products: @products %>
-    <%= render 'cart_list' unless @order_products.blank? %>
+    <%= render 'navbar' %>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <%= render 'product_list', products: @products %>
+        </div>
+        <div class="col">
+          <%= render 'cart_list' unless @order_products.blank? %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

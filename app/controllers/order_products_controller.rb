@@ -34,7 +34,8 @@ class OrderProductsController < ApplicationController
   end
 
   def render_error(message)
-    redirect_to root_path, notice: message
+    flash[:error] = message
+    redirect_to root_path
   end
 
   def set_order

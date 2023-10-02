@@ -1,33 +1,33 @@
-<tbody>
-    <table>
-      <thead>
-      <tr>
-        <th>Product Code</th>
-        <th>Name</th>
-        <th>Price</th>
-      </tr>
-      </thead>
-      <tbody>
-      <% @products.each do |product| %>
-        <tr>
-          <td><%= product.product_code %></td>
-          <td><%= product.name %></td>
-          <td><%= format_price(product.price) %></td>
+<h3>Products</h3>
+<table class="table align-middle">
+  <thead>
+  <tr>
+    <th scope="col">Product Code</th>
+    <th scope="col">Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">Actions</th> <!-- Added a new header column for actions -->
+  </tr>
+  </thead>
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td class="fw-bold"><%= product.product_code %></td>
+      <td><%= product.name %></td>
+      <td><%= format_price(product.price) %></td>
+        <% if current_order.product_already_in_cart?(product.id) %>
+          <td class="table-success" colspan="2">Already in the cart</td>
+        <% else %>
           <td>
-            <% if current_order.product_already_in_cart?(product.id) %>
-              Product is in the cart
-            <% else %>
-              <%= form_for @order_product do |f| %>
-                <%= f.hidden_field :product_id, value: product.id %>
-                <%= f.number_field :quantity, value: 1, min: 1 %>
-                </td>
-                <td>
-                  <%= f.submit "Add to cart" %>
-              <% end %>
+            <%= form_for @order_product do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.number_field :quantity, value: 1, min: 1, class: "form-control form-control-sm" %>
+              </td>
+              <td>
+                <%= f.submit "Add to cart", class: "btn btn-success btn-sm" %>
             <% end %>
-            </td>
-            </tr>
-      <% end %>
-      </tbody>
-    </table>
-</tbody>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

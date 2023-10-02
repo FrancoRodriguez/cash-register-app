@@ -1,18 +1,21 @@
-<p>
-  <strong>Product code:</strong>
-  <%= @product.product_code %>
-</p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= number_to_currency(@product.price, unit: '€', precision: 2) %>
-</p>
-
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %> |
-<%= link_to 'Home', root_path %>
+<div class="container text-center">
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <p class="fw-bold">
+        <strong>Product code:</strong>
+        <%= @product.product_code %>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= @product.name %>
+      </p>
+      <p>
+        <strong>Price:</strong>
+        <%= number_to_currency(@product.price, unit: '€', precision: 2) %>
+      </p>
+      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary btn-sm" %> |
+      <%= link_to 'Back', products_path, class: "btn btn-primary btn-sm" %> |
+      <%= link_to 'Home', root_path, class: "btn btn-primary btn-sm" %>
+    </div>
+  </div>
+</div>

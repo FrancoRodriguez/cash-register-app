@@ -1,32 +1,31 @@
-<%= form_with(model: product) do |form| %>
+<%= form_with(model: product, local: true, html: { class: "needs-validation" }) do |form| %>
   <% if product.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
+      <ul class="list-group list-group-numbered">
         <% product.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="list-group-item"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :product_code %>
-    <%= form.text_field :product_code %>
+  <div class="mb-3">
+    <%= form.label :product_code, class: "form-label" %>
+    <%= form.text_field :product_code, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
+  <div class="mb-3">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.text_field :price, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit "Save", class: "btn btn-success btn-sm" %>
   </div>
 <% end %>
